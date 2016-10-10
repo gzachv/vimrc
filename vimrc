@@ -9,7 +9,13 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Plugins Here:
+" Plugins Here
+Plugin 'scrooloose/nerdtree'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -57,6 +63,8 @@ set hlsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 
+let python_highlight_all=1
+
 set encoding=utf8
 
 colo desert
@@ -90,3 +98,46 @@ set wrap "Wrap lines
 highlight default link LinuxError ErrorMsg
 autocmd InsertEnter * match LinuxError /\s\+\%#\@<!$/
 autocmd InsertLeave * match LinuxError /\s\+$/
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Python Configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Split Settings
+set splitbelow
+set splitright
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Code Folding
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldmethod=indent
+set foldlevel=99
+
+nnoremap <space> za
+let g:SimpylFold_docstring_preview=1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => PEP8 Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+set encoding=utf-8
+
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
