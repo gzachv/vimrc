@@ -16,6 +16,8 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
 Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -80,9 +82,9 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 8 spaces
-set shiftwidth=8
-set tabstop=8
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
@@ -95,9 +97,8 @@ set wrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => whitespace
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-highlight default link LinuxError ErrorMsg
-autocmd InsertEnter * match LinuxError /\s\+\%#\@<!$/
-autocmd InsertLeave * match LinuxError /\s\+$/
+match ErrorMsg '\s\+$'
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python Configs
@@ -140,4 +141,13 @@ au BufNewFile,BufRead *.js, *.html, *.css
 set encoding=utf-8
 
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+set t_Co=256
 
